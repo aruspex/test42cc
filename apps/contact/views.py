@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import PersonForm
 from .models import Person
@@ -12,6 +12,15 @@ def contacts(request):
            )
 
 
-def form(request):
-    form = PersonForm()
-    return render(request, 'contact/form.html', {'form': form})
+def edit_form(request):
+    instance = Person.objects.all()[0]
+    form = PersonForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=instance
+    )
+    if form.is_valid():
+        form.save()
+        return redirect('contacts')
+    else:
+        return render(request, 'contact/person_form.html', {'form': form})
