@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 import sys
 
+# from django.settings import conf
+
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -46,6 +49,7 @@ INSTALLED_APPS = (
 
     'apps.contact',
     'apps.http_storage_middleware',
+    'apps.context_processor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -130,3 +134,14 @@ TEMPLATE_DIRS = (
 
 # Turn off south during test
 SOUTH_TESTS_MIGRATE = False
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "apps.context_processor.custom_processor.settings_to_context"
+)
