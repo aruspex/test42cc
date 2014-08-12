@@ -4,19 +4,27 @@
 
 
 {% block content %}
-    <h3>42 Coffee Cups Test Assignment</h3>
-    <div class="left">
-        <p>{{person.name}}</p>
-        <p>{{person.surname}}</p>
-        <p>{{person.birth_date}}</p>
-        <p>Bio:<br>{{person.bio}}</p>
+    <div class="row">
+        <div class="span10">
+            <h3>42 Coffee Cups Test Assignment</h3>
+            <div class="row">
+                <div class="span5">
+                    <p>{{ person.name }}</p>
+                    <p>{{ person.surname }}</p>
+                    <p>{{ person.birth_date }}</p>
+                    <p>Bio:<br>{{ person.bio }}</p>
+                </div>
+                <div class="span5">
+                    <p>Contacts</p>
+                    <p>Email: {{ person.email }}</p>
+                    <p>Jabber: {{ person.jabber }}</p>
+                    <p>Skype: {{ person.skype }}</p>
+                    <p>Other contacts:<br>{{person.other_contacts}}</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="right">
-        <p>Contacts</p>
-        <p>Email: {{person.email}}</p>
-        <p>Jabber: {{person.jabber}}</p>
-        <p>Skype: {{person.skype}}</p>
-        <p>Other contacts:<br>{{person.other_contacts}}</p>
-    </div>
+    <hr>
+    <a href="{% url 'requests' %}">requests</a>
 
 {% endblock content %}
