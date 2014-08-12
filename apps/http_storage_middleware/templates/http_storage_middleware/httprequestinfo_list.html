@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Requests {% endblock title %}
+
+{% block content %}
+    {{ block.super }}
+    <h3>Requests:</h3>
+    <table class="table">
+        <tr>
+            <td>Date</td>
+            <td>Method</td>
+            <td>Path</td>
+            <td>Ajax?</td>
+        </tr>
+        {% for request in requests %}
+        <tr>
+            <td>{{ request.date }}</td>
+            <td>{{ request.method }}</td>
+            <td>{{ request.path }}</td>
+            <td>{{ request.is_ajax }}</td>
+        </tr>       
+        {% endfor %}
+    </table>
+    <hr>
+    <a href="{% url 'contacts' %}">contacts</a> 
+{% endblock content %}

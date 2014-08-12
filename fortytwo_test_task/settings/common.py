@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'south',
 
     'apps.contact',
+    'apps.http_storage_middleware',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -54,6 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.http_storage_middleware.middleware.HttpRequestStorageMiddleware',
 )
 
 ROOT_URLCONF = 'fortytwo_test_task.urls'
