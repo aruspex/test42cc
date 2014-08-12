@@ -46,10 +46,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'south',
+    'crispy_forms',
 
     'apps.contact',
     'apps.http_storage_middleware',
     'apps.context_processor',
+    'apps.users'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -126,9 +128,6 @@ STATICFILES_DIRS = (
 
 # Template Settings
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, 'templates'),
 )
 
@@ -145,3 +144,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "apps.context_processor.custom_processor.settings_to_context"
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+LOGIN_URL = '/users/login'
+LOGIN_REDIRECT_URL = '/'

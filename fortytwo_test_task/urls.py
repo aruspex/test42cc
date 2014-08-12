@@ -12,11 +12,13 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'apps.contact.views.contacts', name='contacts'),
     url(r'^requests/$', RequestListView.as_view(), name='requests'),
+    url(r'^form/$', 'apps.contact.views.edit_form', name='edit_form'),
+    url(r'^users/', include('apps.users.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 
 urlpatterns += static(
-    settings.STATIC_URL,
-    document_root=settings.STATIC_ROOT
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
 )
 urlpatterns += staticfiles_urlpatterns()

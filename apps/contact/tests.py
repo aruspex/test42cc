@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
@@ -24,3 +25,40 @@ class ContactPageTest(TestCase):
     def test_person_model_count(self):
         people_count = Person.objects.count()
         self.assertEqual(people_count, 1)
+
+
+class EditPageTest(TestCase):
+    fixtures = ['initial_data.json']
+
+    def setUp(self):
+        self.url = reverse('edit_form')
+        self.login_url = reverse('users_login')
+        self.password = '123456'
+        self.user = User.objects.create_user(
+            username='apet', password='123456')
+        self.person_params = Person.objects.values()[0]
+
+    def test_edit_page_status_code(self):
+        # Redirect to login page
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 302)
+        # Login page works, and now user can edit form
+        self.client.post(
+            self.login_url,
+            {'username': self.user.username, 'password': self.password}
+        )
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_form_edittion_works_fine(self):
+        self.client.post(
+            self.login_url,
+            {'username': self.user.username, 'password': self.password}
+        )
+        self.person_params['name'] = 'othername'
+        self.person_params['photo'] = ''
+        response = self.client.post(self.url, self.person_params)
+        # Redirect to contact page works fine
+        self.assertEqual(response.status_code, 302)
+        changed_person_name = Person.objects.all()[0].name
+        self.assertEqual(changed_person_name, self.person_params['name'])

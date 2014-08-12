@@ -1,2 +1,6 @@
 *.pyc
 *.sqlite3
+*jpg
+*png
+!glyphicons*
+!sample.jpg

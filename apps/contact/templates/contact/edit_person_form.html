@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <h3 class="man_right">42 Coffee Cups Test Assignment</h3>
+    <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% crispy form %}
+        <div class="span12 man_right">
+            <input type="submit" value="Save" class="btn btn-primary">
+            <a href="{% url 'contacts' %}">Cancel</a>
+            <hr>
+            <a href="{% url 'requests' %}">requests</a>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block extra_js %}
+    <script src="{% static 'js/photo_preview.js' %}"></script>
+{% endblock extra_js %}
