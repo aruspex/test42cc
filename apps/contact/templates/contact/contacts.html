@@ -20,8 +20,10 @@
                     <p>Jabber: {{ person.jabber }}</p>
                     <p>Skype: {{ person.skype }}</p>
                     <p>Other contacts:<br>{{person.other_contacts}}</p>
-                    Photo:
-                    <img src="{{ person.photo }}" alt="photo">
+                    {% if person.photo %}
+                        Photo:
+                        <img src="{{ MEDIA_URL }}{{ person.photo }}" alt="photo">
+                    {% endif %}
                 </div>
             </div>
         </div>
