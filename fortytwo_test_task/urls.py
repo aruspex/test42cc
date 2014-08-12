@@ -12,6 +12,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'apps.contact.views.contacts', name='contacts'),
     url(r'^requests/$', RequestListView.as_view(), name='requests'),
+    url(r'^form/$', 'apps.contact.views.form', name='form'),
     url(r'^admin/', include(admin.site.urls)),
 )
 
