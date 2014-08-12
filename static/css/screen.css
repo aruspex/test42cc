@@ -11,8 +11,44 @@ a {
     text-decoration: underline;
 }
 
+a.top_link {
+    line-height: 40px;
+}
+
 hr {
     color: #999999;
     background-color: #999999;
     height: 1px;
+}
+
+.asteriskField {
+    display: none;
+}
+
+label:after {
+    content: ":";
+}
+
+.form-horizontal label[for="id_other_contacts"],
+.form-horizontal label[for="id_bio"],
+.form-horizontal textarea.man_left {
+    float: none;
+    text-align: left;
+    margin-left: 80px;
+}
+
+textarea {
+    width: 400px;
+}
+
+#div_id_bio {
+    margin-top: 18px;
+}
+
+.form-horizontal .man_right {
+    margin-left: 90px;
+}
+
+div.photo {
+    margin-right: 30px;
 }

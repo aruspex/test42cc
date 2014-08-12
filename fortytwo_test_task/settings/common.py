@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'apps.contact',
     'apps.http_storage_middleware',
     'apps.context_processor',
+    'apps.users'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -145,3 +146,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+LOGIN_URL = '/users/login'
+LOGIN_REDIRECT_URL = '/'

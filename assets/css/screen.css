@@ -11,6 +11,10 @@ a {
     text-decoration: underline;
 }
 
+a.top_link {
+    line-height: 40px;
+}
+
 hr {
     color: #999999;
     background-color: #999999;

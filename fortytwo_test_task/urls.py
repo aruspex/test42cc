@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^$', 'apps.contact.views.contacts', name='contacts'),
     url(r'^requests/$', RequestListView.as_view(), name='requests'),
     url(r'^form/$', 'apps.contact.views.edit_form', name='edit_form'),
+    url(r'^users/', include('apps.users.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 
