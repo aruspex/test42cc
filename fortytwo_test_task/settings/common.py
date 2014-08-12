@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'south',
+    'crispy_forms'
 
     'apps.contact',
     'apps.http_storage_middleware',
