@@ -1,3 +1,18 @@
- body {
-    background-color: green;
- }
+body {
+    width: 960px;
+    margin: auto;
+}
+
+div {
+    float: left;
+    width: 480px;
+}
+
+h3 {
+    font-weight: normal;
+}
+
+p {
+    margin-bottom: 5px;
+    margin-top: 2px;
+}

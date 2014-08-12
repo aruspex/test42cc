@@ -1,0 +1,16 @@
+[
+    {
+        "model": "contact.person",
+        "pk": 1,
+        "fields": {
+            "name": "Anton",
+            "surname": "Petrenko",
+            "birth_date": "1990-10-21",
+            "bio": "I was born in Donetsk, graduated Donetsk national technical university (speciality \"Telecommunication systems and networks\") this year.",
+            "email": "petrenkoantserg@gmail.com",
+            "jabber": "apet@khavr.com",
+            "skype": "per4itejib",
+            "other_contacts": "mobile phone: 0999024057"
+        }
+    }
+]
