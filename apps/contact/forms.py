@@ -9,7 +9,7 @@ from .models import Person
 
 
 class PersonForm(forms.ModelForm):
-    photo = forms.ImageField(widget=forms.FileInput)
+    photo = forms.ImageField(required=False, widget=forms.FileInput)
 
     class Meta:
         model = Person
