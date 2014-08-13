@@ -1,10 +1,12 @@
+from StringIO import StringIO
+
 from django.contrib.auth.models import User
+from django.core.management import call_command
 from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.test import TestCase
 
 from .models import Person
-from .templatetags import my_tags
 
 
 class ContactPageTest(TestCase):
@@ -88,3 +90,17 @@ class TemplateTagsTest(TestCase):
             template.render(context),
             '/admin/contact/person/{0}/'.format(person_obj.pk)
         )
+
+
+class CustomCommandsTest(TestCase):
+
+    def test_models_count_command_prints_to_both_stdout_and_stderr(self):
+        command_output = StringIO()
+        command_stderr = StringIO()
+        call_command('models_count', stdout=command_output, stderr=command_stderr)
+        command_output.seek(0)
+        command_stderr.seek(0)
+        result = command_output.read()
+        errors = command_stderr.read()
+        self.assertIn('error: contact_person', errors)
+        self.assertIn('contact_person', result)
