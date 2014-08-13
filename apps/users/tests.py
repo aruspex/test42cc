@@ -22,9 +22,10 @@ class UerAuthTest(TestCase):
         # Register new Uer
         self.client.post(self.register_url, self.new_user_params)
         # he appears in User...
+        users = User.objects.filter(username=self.new_user_params['username'])
         self.assertEqual(
-            User.objects.all()[0].username,
-            self.new_user_params['username']
+            users.count(),
+            1
         )
         # ... and he logged in
         response = self.client.get(self.url)
