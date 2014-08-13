@@ -6,10 +6,12 @@ from crispy_forms.layout import (
 )
 
 from .models import Person
+from .widgets import CalendarWidget
 
 
 class PersonForm(forms.ModelForm):
     photo = forms.ImageField(required=False, widget=forms.FileInput)
+    birth_date = forms.DateField(widget=CalendarWidget)
 
     class Meta:
         model = Person

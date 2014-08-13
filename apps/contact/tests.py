@@ -38,27 +38,39 @@ class EditPageTest(TestCase):
             username='apet', password='123456')
         self.person_params = Person.objects.values()[0]
 
+    def _loign(self):
+        self.client.post(
+            self.login_url,
+            {'username': self.user.username, 'password': self.password}
+        )
+
     def test_edit_page_status_code(self):
         # Redirect to login page
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 302)
         # Login page works, and now user can edit form
-        self.client.post(
-            self.login_url,
-            {'username': self.user.username, 'password': self.password}
-        )
+        self._loign()
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
     def test_form_edittion_works_fine(self):
-        self.client.post(
-            self.login_url,
-            {'username': self.user.username, 'password': self.password}
-        )
+        self._loign()
         self.person_params['name'] = 'othername'
         self.person_params['photo'] = ''
         response = self.client.post(self.url, self.person_params)
         # Redirect to contact page works fine
+        self.assertEqual(response.status_code, 302)
+        changed_person_name = Person.objects.all()[0].name
+        self.assertEqual(changed_person_name, self.person_params['name'])
+
+    def test_form_edition_works_with_ajax_requests(self):
+        self._loign()
+        self.person_params['name'] = 'othername'
+        self.person_params['photo'] = ''
+        response = self.client.post(
+            self.url, self.person_params,
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest'
+        )
         self.assertEqual(response.status_code, 302)
         changed_person_name = Person.objects.all()[0].name
         self.assertEqual(changed_person_name, self.person_params['name'])

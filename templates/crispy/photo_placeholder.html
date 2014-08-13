@@ -1,3 +1,12 @@
+{% load my_tags %}
+{% load staticfiles %}
+
+{% photo_preview as photo %}
+
 <div class="photo">
-    <img src="#" alt="photo" id="forphoto" hidden class="man_right">
+    {% if photo %}
+        <img src="{{ MEDIA_URL }}{{ photo }}" alt="photo" id="forphoto" class="man_right">
+    {% else %}
+        <img src="#" alt="photo" id="forphoto" hidden class="man_right">
+    {% endif %}
 </div>

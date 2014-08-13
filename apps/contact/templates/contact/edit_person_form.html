@@ -5,7 +5,7 @@
 
 {% block content %}
     <h3 class="man_right">42 Coffee Cups Test Assignment</h3>
-    <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal">
+    <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal" id="contact_form">
         {% crispy form %}
         <div class="span12 man_right">
             <input type="submit" value="Save" class="btn btn-primary">
@@ -18,4 +18,17 @@
 
 {% block extra_js %}
     <script src="{% static 'js/photo_preview.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            var form_options = {
+                success: function() {
+                    window.location.assign('/');
+                },
+                beforeSubmit: function() {
+                    document.write('<img src="/static/img/ajax-loader.gif" class="img-rounded" style="position: absolute; left: 50%; top: 50%;">');
+                }
+            };
+            $('#contact_form').ajaxForm(form_options);
+        });
+    </script>
 {% endblock extra_js %}
