@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, DatabaseError
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
@@ -41,8 +41,11 @@ def do_on_save(sender, **kwargs):
         change_type = 'C'
     else:
         change_type = 'U'
-
-    ModelChange.objects.create(model_name=model_name, change_type=change_type)
+    try:
+        ModelChange.objects.create(
+            model_name=model_name, change_type=change_type)
+    except DatabaseError:
+        pass
 
 
 @receiver(post_delete)
@@ -50,4 +53,7 @@ def do_on_delete(sender, **kwargs):
     model_name = kwargs['instance']._meta.object_name
     if model_name == 'ModelChange':
         return
-    ModelChange.objects.create(model_name=model_name, change_type='D')
+    try:
+        ModelChange.objects.create(model_name=model_name, change_type='D')
+    except DatabaseError:
+        pass
