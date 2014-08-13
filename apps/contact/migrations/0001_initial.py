@@ -2,25 +2,28 @@
 from south.utils import datetime_utils as datetime
 from south.db import db
 from south.v2 import SchemaMigration
-from django.db import models
+from django.db import models, DatabaseError
 
 
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Person'
-        db.create_table(u'contact_person', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('surname', self.gf('django.db.models.fields.CharField')(max_length=25)),
-            ('birth_date', self.gf('django.db.models.fields.DateField')()),
-            ('bio', self.gf('django.db.models.fields.TextField')()),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('jabber', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('skype', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('other_contacts', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal(u'contact', ['Person'])
+        try:
+            db.create_table(u'contact_person', (
+                (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+                ('name', self.gf('django.db.models.fields.CharField')(max_length=20)),
+                ('surname', self.gf('django.db.models.fields.CharField')(max_length=25)),
+                ('birth_date', self.gf('django.db.models.fields.DateField')()),
+                ('bio', self.gf('django.db.models.fields.TextField')()),
+                ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
+                ('jabber', self.gf('django.db.models.fields.EmailField')(max_length=75)),
+                ('skype', self.gf('django.db.models.fields.CharField')(max_length=30)),
+                ('other_contacts', self.gf('django.db.models.fields.TextField')()),
+            ))
+            db.send_create_signal(u'contact', ['Person'])
+        except DatabaseError:
+            pass
 
 
     def backwards(self, orm):

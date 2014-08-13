@@ -5,6 +5,7 @@ class HttpRequestInfo(models.Model):
     """
     Stores information about requests collected by middleware.
     """
+    priority = models.IntegerField(default=1)
     date = models.DateTimeField(auto_now_add=True)
     method = models.CharField(max_length=10)
     path = models.CharField(max_length=150)

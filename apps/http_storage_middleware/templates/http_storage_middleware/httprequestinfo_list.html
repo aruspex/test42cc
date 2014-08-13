@@ -6,21 +6,27 @@
 {% block content %}
     {{ block.super }}
     <h3>Requests:</h3>
-    <table class="table">
-        <tr>
-            <td>Date</td>
-            <td>Method</td>
-            <td>Path</td>
-            <td>Ajax?</td>
-        </tr>
-        {% for request in requests %}
-        <tr>
-            <td><a href="{% edit_link request %}">{{ request.date }}</a></td>
-            <td>{{ request.method }}</td>
-            <td>{{ request.path }}</td>
-            <td>{{ request.is_ajax }}</td>
-        </tr>       
-        {% endfor %}
+    <table class="table sortable" id="request_table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Method</th>
+                <th>Path</th>
+                <th>Ajax?</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in requests %}
+            <tr>
+                <td><a href="{% edit_link request %}">{{ request.date }}</a></td>
+                <td>{{ request.method }}</td>
+                <td>{{ request.path }}</td>
+                <td>{{ request.is_ajax }}</td>
+                <td>{{ request.priority }}</td>
+            </tr>       
+            {% endfor %}
+        </tbody>
     </table>
     <hr>
     <a href="{% url 'contacts' %}">contacts</a> 
