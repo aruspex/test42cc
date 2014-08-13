@@ -23,8 +23,29 @@
     <script>
         $(document).ready(function() {
             var form_options = {
-                success: function(resopnse) {
-                    window.location.assign('/');
+                success: function(response) {
+                    /* If form is not valid, then remove ajax-loader and show form again
+                    with appropriate error messages obtained from server in json format */
+                    if (response.errors) {
+                        $('.to_hide').show();
+                        $('.img-rounded').remove();
+                        for (error in response.errors) {
+                            id = $('#div_id_' + error);
+                            /* Do not display error message if it's already displaying!*/
+                            if (id.find('.help-block').length === 0) {
+                                controls = id.find('.controls');
+                                id.addClass('error');
+                                $("<p></p>", {
+                                    text: response.errors[error],
+                                    class: 'help-block'
+                                }).appendTo(controls);
+                            }
+                        }
+                    }
+                    /* If form is valid - redirect to home page */
+                    else {
+                        window.location.assign('/');
+                    }
                 },
                 beforeSubmit: function() {
                     $('.to_hide').hide();
@@ -32,7 +53,7 @@
                         .append('<img src="/static/img/ajax-loader.gif" class="img-rounded" style="position: absolute; left: 50%; top: 50%;">');
                     return true;
                 },
-                error: function() {
+                error: function(response) {
                     alert('Error');
                 }
             };
