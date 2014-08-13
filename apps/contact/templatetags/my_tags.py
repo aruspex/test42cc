@@ -20,7 +20,7 @@ def edit_link(object):
     """
     ct = ContentType.objects.get_for_model(object)
     url = reverse(
-        'admin:{}_{}_change'.format(ct.app_label, ct.model),
+        'admin:{0}_{1}_change'.format(ct.app_label, ct.model),
         args=[object.pk]
     )
     return url

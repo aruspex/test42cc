@@ -86,5 +86,5 @@ class TemplateTagsTest(TestCase):
         context = Context({'person': person_obj})
         self.assertEqual(
             template.render(context),
-            '/admin/contact/person/{}/'.format(person_obj.pk)
+            '/admin/contact/person/{0}/'.format(person_obj.pk)
         )

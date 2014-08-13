@@ -11,4 +11,4 @@ class HttpRequestInfo(models.Model):
     is_ajax = models.BooleanField()
 
     def __unicode__(self):
-        return '{} {}'.format(self.method, self.path)
+        return '{0} {1}'.format(self.method, self.path)

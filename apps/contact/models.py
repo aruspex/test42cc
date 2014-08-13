@@ -13,4 +13,4 @@ class Person(models.Model):
     photo = models.ImageField(upload_to="contact_photo", null=True, blank=True)
 
     def __unicode__(self):
-        return "{} {}".format(self.name, self.surname)
+        return "{0} {1}".format(self.name, self.surname)

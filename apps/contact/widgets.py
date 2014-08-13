@@ -12,8 +12,8 @@ class CalendarWidget(Widget):
             vstr = datetime_safe.new_datetime(value).strftime('%m/%d/%y')
         else:
             vstr = value
-        id = "id_{}".format(name)
-        inp = '<input type="text" value="{}" name="{}" id="{}" />'.format(
+        id = "id_{0}".format(name)
+        inp = '<input type="text" value="{0}" name="{1}" id="{2}" />'.format(
             vstr, name, id)
         scr = '<script type="text/javascript">$(document).ready(function() {$("#%s").datepicker();});</script>' % id
 
