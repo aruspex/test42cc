@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.test import TestCase
 
-from .models import Person
+from .models import Person, ModelChange
 
 
 class ContactPageTest(TestCase):
@@ -97,10 +97,49 @@ class CustomCommandsTest(TestCase):
     def test_models_count_command_prints_to_both_stdout_and_stderr(self):
         command_output = StringIO()
         command_stderr = StringIO()
-        call_command('models_count', stdout=command_output, stderr=command_stderr)
+        call_command(
+            'models_count',
+            stdout=command_output,
+            stderr=command_stderr
+        )
         command_output.seek(0)
         command_stderr.seek(0)
         result = command_output.read()
         errors = command_stderr.read()
         self.assertIn('error: contact_person', errors)
         self.assertIn('contact_person', result)
+
+
+class SignalReceiversTest(TestCase):
+
+    def test_signal_receivers(self):
+        # No in ModelChange there is only 'Created' entry
+        person_created = ModelChange.objects.filter(
+            model_name='Person',
+            change_type='C'
+        )
+        person_deleted = ModelChange.objects.filter(
+            model_name='Person',
+            change_type='D'
+        )
+        person_updated = ModelChange.objects.filter(
+            model_name='Person',
+            change_type='U'
+        )
+        self.assertTrue(person_created)
+        self.assertFalse(person_deleted)
+        self.assertFalse(person_updated)
+        # Update person object
+        Person.objects.all()[0].save()
+        person_updated = ModelChange.objects.filter(
+            model_name='Person',
+            change_type='U'
+        )
+        self.assertTrue(person_updated)
+        # Delete person object
+        Person.objects.all()[0].delete()
+        person_deleted = ModelChange.objects.filter(
+            model_name='Person',
+            change_type='D'
+        )
+        self.assertTrue(person_deleted)
