@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.template import Template, Context
 from django.test import TestCase
 
 from .models import Person
+from .templatetags import my_tags
 
 
 class ContactPageTest(TestCase):
@@ -74,3 +76,15 @@ class EditPageTest(TestCase):
         self.assertEqual(response.status_code, 302)
         changed_person_name = Person.objects.all()[0].name
         self.assertEqual(changed_person_name, self.person_params['name'])
+
+
+class TemplateTagsTest(TestCase):
+
+    def test_edit_link_is_returned_by_tag(self):
+        person_obj = Person.objects.all()[0]
+        template = Template("{% load my_tags %}{% edit_link person %}")
+        context = Context({'person': person_obj})
+        self.assertEqual(
+            template.render(context),
+            '/admin/contact/person/{}/'.format(person_obj.pk)
+        )
