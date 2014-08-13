@@ -20,7 +20,7 @@ class Person(models.Model):
 
 class ModelChange(models.Model):
     TYPE_CHOICES = (
-        ('S', 'Saved'),
+        ('C', 'Created'),
         ('U', 'Updated'),
         ('D', 'Deleted')
     )
