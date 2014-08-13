@@ -10,10 +10,14 @@ class HttpMiddlewareTest(TestCase):
     def setUp(self):
         self.url = reverse('requests')
 
-    def test_requests_are_properly_add_to_db(self):
+    def test_requests_are_properly_add_to_db_with_priorty_equals_one(self):
         for request_index in xrange(1, 4):
             self.client.get(self.url)
             saved_requests_count = HttpRequestInfo.objects.count()
+            self.assertEqual(
+                HttpRequestInfo.objects.latest('date').priority,
+                1
+            )
             self.assertEqual(saved_requests_count, request_index)
 
     def test_view_for_get_and_post_requests(self):
