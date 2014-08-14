@@ -2,6 +2,8 @@ from django.db import models, DatabaseError
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+from django_resized import ResizedImageField
+
 
 class Person(models.Model):
     name = models.CharField(max_length=20)
@@ -12,7 +14,10 @@ class Person(models.Model):
     jabber = models.EmailField()
     skype = models.CharField(max_length=30)
     other_contacts = models.TextField()
-    photo = models.ImageField(upload_to="contact_photo", null=True, blank=True)
+    photo = ResizedImageField(
+        upload_to="contact_photo", null=True, blank=True,
+        max_width=380, max_height=280
+    )
 
     def __unicode__(self):
         return "{0} {1}".format(self.name, self.surname)
