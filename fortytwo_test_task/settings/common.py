@@ -49,7 +49,7 @@ INSTALLED_APPS = (
     'crispy_forms',
 
     'apps.contact',
-    'apps.http_storage_middleware',
+    'apps.request_info',
     'apps.users'
 )
 
@@ -60,7 +60,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'apps.http_storage_middleware.middleware.HttpRequestStorageMiddleware',
+    'apps.request_info.middleware.HttpRequestStorageMiddleware',
 )
 
 ROOT_URLCONF = 'fortytwo_test_task.urls'
