@@ -50,7 +50,6 @@ INSTALLED_APPS = (
 
     'apps.contact',
     'apps.http_storage_middleware',
-    'apps.context_processor',
     'apps.users'
 )
 
@@ -142,7 +141,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    "apps.context_processor.custom_processor.settings_to_context"
+    "apps.contact.context_processors.settings_to_context"
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
