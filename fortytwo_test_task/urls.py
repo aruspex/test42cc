@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from apps.http_storage_middleware.views import RequestListView
+from apps.request_info.views import RequestListView
 
 from django.contrib import admin
 admin.autodiscover()

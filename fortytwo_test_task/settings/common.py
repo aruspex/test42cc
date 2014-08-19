@@ -49,8 +49,7 @@ INSTALLED_APPS = (
     'crispy_forms',
 
     'apps.contact',
-    'apps.http_storage_middleware',
-    'apps.context_processor',
+    'apps.request_info',
     'apps.users'
 )
 
@@ -61,7 +60,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'apps.http_storage_middleware.middleware.HttpRequestStorageMiddleware',
+    'apps.request_info.middleware.HttpRequestStorageMiddleware',
 )
 
 ROOT_URLCONF = 'fortytwo_test_task.urls'
@@ -142,7 +141,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    "apps.context_processor.custom_processor.settings_to_context"
+    "apps.contact.context_processors.settings_to_context"
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
